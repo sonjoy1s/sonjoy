@@ -54,7 +54,7 @@ void show_report(char *patient, char *report) {
 // TELEMEDICINE
 
 void start_telemedicine(char *patient, char *doctor) {
-    printf("\n📞 Telemedicine Session Started Between %s and Dr. %s...\n", patient, doctor);
+    printf("\nTelemedicine Session Started Between %s and Dr. %s...\n", patient, doctor);
 }
 
 
