@@ -1,66 +1,58 @@
-#include <stdio.h>
-#include <string.h>
+#include "healtcareproject.h"
 #include <stdlib.h>
 
 // USER AUTHENTICATION
 
-struct User {
-    char username[50];
-    char password[50];
-    char role[20];
-};
-
-int authenticate(struct User u, char *username, char *password) {
+int authenticate(struct User u, char *username, char *password)
+{
     return strcmp(u.username, username) == 0 && strcmp(u.password, password) == 0;
 }
 
-// PERSON → PATIENT / DOCTOR / STAFF
 
-struct Patient {
-    char name[50];
-    int age;
-    char phone[30];
-    char disease[50];
-    char reports[10][50];
-    int report_count;
-    char appointments[10][50];
-    int appt_count;
-};
-
-struct Doctor {
-    char name[50];
-    char phone[30];
-    char speciality[50];
-};
-
-struct Staff {
-    char name[50];
-    char phone[30];
-    char role[50];
-};
+// ...existing code...
+{
+  "configurations": [
+    {
+      "name": "Linux",
+      "compilerPath": "/usr/bin/g++",
+      "intelliSenseMode": "gcc-x64",
+      "includePath": [
+        "${workspaceFolder}/**",
+        "/usr/include",
+        "/usr/include/c++/11"
+      ],
+      "cppStandard": "c++17"
+    }
+  ],
+  "version": 4
+}
+// ...existing code...// PERSON → PATIENT / DOCTOR / STAFF
 
 // APPOINTMENT
 
-void show_appointment(char *patient, char *doctor, char *date) {
+void show_appointment(char *patient, char *doctor, char *date)
+{
     printf("\nAppointment: %s with Dr. %s on %s\n", patient, doctor, date);
 }
 
 // REPORT
 
-void show_report(char *patient, char *report) {
+void show_report(char *patient, char *report)
+{
     printf("Report: %s for %s\n", report, patient);
 }
 
 // TELEMEDICINE
 
-void start_telemedicine(char *patient, char *doctor) {
+void start_telemedicine(char *patient, char *doctor)
+{
     printf("\nTelemedicine Session Started Between %s and Dr. %s...\n", patient, doctor);
 }
 
-
 // ADMIN DASHBOARD
 
-void admin_dashboard(int p, int d, int s) {
+void admin_dashboard(int p, int d, int s)
+{
     printf("\n ADMIN DASHBOARD \n");
     printf("Total Patients: %d\n", p);
     printf("Total Doctors: %d\n", d);
@@ -70,7 +62,8 @@ void admin_dashboard(int p, int d, int s) {
 
 // MAIN PROGRAM
 
-int main() {
+int start()
+{
 
     // Default Admin User
     struct User admin = {"admin", "1234", "admin"};
@@ -83,7 +76,8 @@ int main() {
     printf("Password: ");
     scanf("%s", in_pass);
 
-    if (!authenticate(admin, in_user, in_pass)) {
+    if (!authenticate(admin, in_user, in_pass))
+    {
         printf("\nAuthentication failed!\n");
         return 0;
     }
@@ -107,7 +101,6 @@ int main() {
     printf("Enter patient disease: ");
     scanf("%s", patient.disease);
 
-
     // DOCTOR REGISTRATION
     struct Doctor doctor;
 
@@ -120,8 +113,6 @@ int main() {
     printf("Enter doctor speciality: ");
     scanf("%s", doctor.speciality);
 
-
-    
     // STAFF REGISTRATION
     struct Staff staff;
 
@@ -134,7 +125,6 @@ int main() {
     printf("Enter staff role: ");
     scanf("%s", staff.role);
 
-
     // APPOINTMENT
     char appt_date[50];
 
@@ -143,7 +133,6 @@ int main() {
 
     strcpy(patient.appointments[patient.appt_count++], appt_date);
     show_appointment(patient.name, doctor.name, appt_date);
-
 
     // REPORT
     char report[50];
@@ -154,19 +143,17 @@ int main() {
     strcpy(patient.reports[patient.report_count++], report);
     show_report(patient.name, report);
 
-
     // TELEMEDICINE
     char option[10];
     printf("\nStart Telemedicine? (yes/no): ");
     scanf("%s", option);
 
-    if (strcmp(option, "yes") == 0) {
+    if (strcmp(option, "yes") == 0)
+    {
         start_telemedicine(patient.name, doctor.name);
     }
 
-
     // ADMIN DASHBOARD
     admin_dashboard(1, 1, 1);
-
     return 0;
 }
